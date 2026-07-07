@@ -23,7 +23,7 @@ La notebook está pensada para correr en Google Colab, leyendo directo la planil
 
 1. Abrí la notebook desde GitHub en Colab con el badge de arriba, o directamente con este link:
 
-   `https://colab.research.google.com/github/matias-ferrero/algo2-stats/blob/main/stats_algo2.ipynb`
+   [https://colab.research.google.com/github/matias-ferrero/algo2-stats/blob/main/stats_algo2.ipynb?authuser=1](https://colab.research.google.com/github/matias-ferrero/algo2-stats/blob/main/stats_algo2.ipynb?authuser=1)
 
    También podés ir a [colab.research.google.com](https://colab.research.google.com) → `Archivo > Abrir notebook > GitHub` y buscar `matias-ferrero/algo2-stats`.
 2. `Entorno de ejecución > Ejecutar todas` (o correr celda por celda desde arriba hacia abajo).
