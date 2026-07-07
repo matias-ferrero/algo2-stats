@@ -34,5 +34,5 @@ La notebook está pensada para correr en Google Colab, leyendo directo la planil
 
 ## Notas
 
-- La sección **DNS TP1** y **FAILED TP1** ya están implementadas; **PASS TP1** todavía está pendiente (`# TODO`).
+- La sección **DNS TP1** y **DESAPROBADOS TP1** ya están implementadas; **APROBADOS TP1** todavía está pendiente (`# TODO`).
 - Los nombres de hoja/columna de la planilla real pueden cambiar de un cuatrimestre a otro (ya pasó entre 2025 y 2026): si aparece una hoja o columna nueva que la notebook no reconoce, hay que agregarla a `SHEET_ALIASES`/`VALID_SHEETS` o a `COLUMN_ALIASES` en la sección de Normalización.
