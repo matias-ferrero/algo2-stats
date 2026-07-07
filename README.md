@@ -10,7 +10,7 @@ A partir de la planilla de corrección (una planilla de Google Sheets con una ho
 
 - Se autentica contra Google Sheets y descarga cada hoja como un DataFrame.
 - Normaliza nombres de hojas y columnas para soportar tanto el esquema usado en 2025 como el usado desde 2026 (ver la sección "Normalización" dentro de la notebook).
-- Calcula estadísticas sobre las entregas: quiénes entregaron el TP0 pero no el TP1 (N/A), y un desglose de quienes desaprobaron el TP1 según su resultado en el TP0 — ambos con su propio gráfico de torta.
+- Calcula estadísticas sobre las entregas: el desglose de aprobados/desaprobados del TP0, quiénes entregaron el TP0 pero no el TP1 (N/A), y un desglose de quienes desaprobaron el TP1 según su resultado en el TP0 — las tres con su propio gráfico de torta.
 
 ## Estructura del repositorio
 
@@ -34,5 +34,5 @@ La notebook está pensada para correr en Google Colab, leyendo directo la planil
 
 ## Notas
 
-- La sección **N/A TP1** y **DESAPROBADOS TP1** ya están implementadas; **APROBADOS TP1** todavía está pendiente (`# TODO`).
+- Las secciones **RESULTADOS TP0**, **N/A TP1** y **DESAPROBADOS TP1** ya están implementadas; **APROBADOS TP1** todavía está pendiente (`# TODO`).
 - Los nombres de hoja/columna de la planilla real pueden cambiar de un cuatrimestre a otro (ya pasó entre 2025 y 2026): si aparece una hoja o columna nueva que la notebook no reconoce, hay que agregarla a `SHEET_ALIASES`/`VALID_SHEETS` o a `COLUMN_ALIASES` en la sección de Normalización.
