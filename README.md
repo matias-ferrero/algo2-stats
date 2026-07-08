@@ -34,5 +34,5 @@ La notebook está pensada para correr en Google Colab, leyendo directo la planil
 
 ## Notas
 
-- Las secciones **RESULTADOS TP0**, **Abandonos post TP0**, **Resultados del TP1**, **Notas del TP1**, **APROBADOS TP1** y **DESAPROBADOS TP1** ya están todas implementadas.
+- Las secciones **RESULTADOS TP0**, **Abandonos post TP0**, **Resultados del TP1**, **Notas del TP1**, **TP1 Aprobados** y **TP1 Desaprobados** ya están todas implementadas.
 - Los nombres de hoja/columna de la planilla real pueden cambiar de un cuatrimestre a otro (ya pasó entre 2025 y 2026): si aparece una hoja o columna nueva que la notebook no reconoce, hay que agregarla a `SHEET_ALIASES`/`VALID_SHEETS` o a `COLUMN_ALIASES` en la sección de Normalización.
