@@ -10,7 +10,7 @@ A partir de la planilla de corrección (una planilla de Google Sheets con una ho
 
 - Se autentica contra Google Sheets y descarga cada hoja como un DataFrame.
 - Normaliza nombres de hojas y columnas para soportar tanto el esquema usado en 2025 como el usado desde 2026 (ver la sección "Normalización" dentro de la notebook).
-- Calcula estadísticas sobre las entregas: el desglose de aprobados/desaprobados del TP0, quiénes entregaron el TP0 pero no el TP1 (abandonos post TP0), el desglose de aprobados/desaprobados del TP1, la distribución de notas entre quienes aprobaron el TP1, y sendos desgloses de quienes aprobaron y desaprobaron el TP1 según su resultado en el TP0 — todas con su propio gráfico (de torta, salvo la distribución de notas del TP1, que usa un gráfico de barras).
+- Calcula estadísticas sobre las entregas: el desglose de aprobados/desaprobados del TP0, quiénes entregaron el TP0 pero no el TP1 (abandonos post TP0), el desglose de aprobados/desaprobados del TP1, la distribución de notas entre quienes aprobaron el TP1 (tanto de la nota final como de cada sección — código, pruebas e informe — por separado), sendos desgloses de quienes aprobaron y desaprobaron el TP1 según su resultado en el TP0, la comparación de intentos de entrega entre aprobados y desaprobados del TP1, y el estado del pipeline de corrección automática entre los desaprobados del TP1 — todas con su propio gráfico (de torta, salvo las distribuciones de notas e intentos, que usan gráficos de barras).
 
 ## Estructura del repositorio
 
@@ -34,5 +34,5 @@ La notebook está pensada para correr en Google Colab, leyendo directo la planil
 
 ## Notas
 
-- Las secciones **RESULTADOS TP0**, **Abandonos post TP0**, **Resultados del TP1**, **Notas del TP1**, **TP1 Aprobados** y **TP1 Desaprobados** ya están todas implementadas.
+- Las secciones **RESULTADOS TP0**, **Abandonos post TP0**, **Resultados del TP1**, **Notas del TP1**, **Notas por sección del TP1**, **TP1 Aprobados**, **TP1 Desaprobados**, **Intentos en TP1** y **Estado en TP1 Desaprobados** ya están todas implementadas.
 - Los nombres de hoja/columna de la planilla real pueden cambiar de un cuatrimestre a otro (ya pasó entre 2025 y 2026): si aparece una hoja o columna nueva que la notebook no reconoce, hay que agregarla a `SHEET_ALIASES`/`VALID_SHEETS` o a `COLUMN_ALIASES` en la sección de Normalización.
