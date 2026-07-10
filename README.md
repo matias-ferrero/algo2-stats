@@ -49,7 +49,7 @@ Al abrir la notebook en Colab, la mayoría de las secciones arrancan colapsadas 
 
 ## Cómo correr en Google Colab
 
-La notebook está pensada para correr en Google Colab, leyendo directo la planilla de Google Sheets en vivo (no hace falta descargar ni subir ningún archivo).
+La notebook **tiene que correrse en Google Colab**: no es solo la opción recomendada, es un requisito técnico. La celda de **Dependencias** hace `from google.colab import auth` para autenticarse contra Google Sheets, y ese paquete solo existe dentro del runtime de Colab — en Jupyter local, VS Code, u otro entorno, esa celda falla al importar y la notebook no llega a correr. La ventaja de esta restricción es que se lee directo la planilla de Google Sheets en vivo, sin tener que descargar ni subir ningún archivo.
 
 1. Abrí la notebook desde GitHub en Colab con el badge de arriba, o directamente con este link:
 
