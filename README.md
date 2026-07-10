@@ -6,7 +6,7 @@ Notebook para generar estadísticas sobre las entregas de los alumnos de la cát
 
 ## Qué hace
 
-A partir de la planilla de corrección (una planilla de Google Sheets con una hoja por TP), la notebook se autentica contra Google Sheets, descarga y normaliza cada hoja, y genera un gráfico (de torta o de barras, según corresponda) y, cuando aplica, una tabla con el detalle de los estudiantes, para cada una de estas preguntas:
+A partir de la planilla de corrección (una planilla de Google Sheets con una hoja por TP), la notebook se autentica contra Google Sheets, descarga y normaliza cada hoja, y genera un gráfico (de barras, de donut, o una barra de ratio, según corresponda) y, cuando aplica, una tabla con el detalle de los estudiantes, para cada una de estas preguntas:
 
 **TP0**
 - **RESULTADOS TP0**: qué proporción de estudiantes aprobó o desaprobó el TP0.
