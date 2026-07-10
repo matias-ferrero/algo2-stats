@@ -6,7 +6,7 @@ Notebook para generar estadísticas sobre las entregas de los alumnos de la cát
 
 ## Qué hace
 
-A partir de la planilla de corrección (una planilla de Google Sheets con una hoja por TP), la notebook se autentica contra Google Sheets, descarga y normaliza cada hoja, y genera un gráfico (de torta o de barras, según corresponda) y, cuando aplica, una tabla con el detalle de los estudiantes, para cada una de estas preguntas:
+A partir de la planilla de corrección (una planilla de Google Sheets con una hoja por TP), la notebook se autentica contra Google Sheets, descarga y normaliza cada hoja, y genera un gráfico (de barras, de donut, o una barra de ratio, según corresponda) y, cuando aplica, una tabla con el detalle de los estudiantes, para cada una de estas preguntas:
 
 **TP0**
 - **RESULTADOS TP0**: qué proporción de estudiantes aprobó o desaprobó el TP0.
@@ -21,6 +21,16 @@ A partir de la planilla de corrección (una planilla de Google Sheets con una ho
 - **Estado en TP1 Desaprobados**: entre los que desaprobaron, cuántos fallaron por un problema del pipeline de corrección automática (no compila, timeout) contra cuántos sí llegaron a corregirse pero no alcanzaron la nota mínima.
 
 Si la hoja de un TP no existe en la planilla de ese cuatrimestre (por ejemplo, un TP que se dejó de tomar), la notebook lo detecta sola y omite esas estadísticas puntuales, sin afectar al resto.
+
+### Cómo leer los gráficos
+
+Todos los gráficos que muestran aprobado/desaprobado/pendiente (RESULTADOS TP0, Abandonos post TP0, Resultados del TP1, TP1 Aprobados, TP1 Desaprobados, y Estado en TP1 Desaprobados) usan siempre los mismos tres colores, así que una vez que se aprende el código en un gráfico se puede leer cualquier otro sin releer la leyenda:
+
+- **Verde**: el caso positivo (aprobado, o corrección sin problemas).
+- **Rojo**: el caso negativo (desaprobado, o error de corrección).
+- **Ámbar**: lo pendiente o no disponible (sin nota todavía, sin registro previo, timeout).
+
+Cuando la proporción es entre dos categorías (por ejemplo, aprobado/desaprobado), se muestra como una **barra de ratio** — un segmento por categoría, con el porcentaje y la cantidad de alumnos adentro. Cuando son tres categorías genuinas (por ejemplo, aprobado/desaprobado/sin nota), se muestra como una **donut**, con el total de alumnos en el hueco central.
 
 ## Cómo está organizada la notebook
 
