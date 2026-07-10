@@ -6,22 +6,31 @@ Notebook para generar estadísticas sobre las entregas de los alumnos de la cát
 
 ## Qué hace
 
-A partir de la planilla de corrección (una planilla de Google Sheets con una hoja por TP), la notebook:
+A partir de la planilla de corrección (una planilla de Google Sheets con una hoja por TP), la notebook se autentica contra Google Sheets, descarga y normaliza cada hoja, y genera un gráfico (de torta o de barras, según corresponda) y, cuando aplica, una tabla con el detalle de los estudiantes, para cada una de estas preguntas:
 
-- Se autentica contra Google Sheets y descarga cada hoja como un DataFrame.
-- Normaliza nombres de hojas y columnas para soportar tanto el esquema usado en 2025 como el usado desde 2026 (ver la sección "Normalización" dentro de la notebook) — incluyendo el alias de la columna `status` (2025) a `Estado`, el nombre que usa el resto de la notebook.
-- Calcula estadísticas sobre las entregas: el desglose de aprobados/desaprobados del TP0, quiénes entregaron el TP0 pero no el TP1 (abandonos post TP0), el desglose de aprobados/desaprobados del TP1, la distribución de notas entre quienes aprobaron el TP1 (tanto de la nota final como de cada sección — código, pruebas e informe — por separado), sendos desgloses de quienes aprobaron y desaprobaron el TP1 según su resultado en el TP0, la comparación de intentos de entrega entre aprobados y desaprobados del TP1, y el estado del pipeline de corrección automática entre los desaprobados del TP1 — todas con su propio gráfico (de torta, salvo las distribuciones de notas e intentos y el estado del pipeline, que usan gráficos de barras).
-- Si la hoja de un TP no existe en la planilla de ese cuatrimestre (por ejemplo, `ABB` no existe desde 2026), omite las estadísticas de esa sección con un aviso en vez de fallar.
+**TP0**
+- **RESULTADOS TP0**: qué proporción de estudiantes aprobó o desaprobó el TP0.
+- **Abandonos post TP0**: quiénes entregaron el TP0 pero nunca llegaron a entregar el TP1, separados según si habían aprobado o desaprobado el TP0.
+
+**TP1**
+- **Resultados del TP1**: qué proporción aprobó, desaprobó, o todavía no tiene nota cargada en el TP1.
+- **Notas del TP1**: distribución de las notas numéricas entre quienes aprobaron.
+- **Notas por sección del TP1**: lo mismo, desglosado en Código, Pruebas e Informe, para ver si el rendimiento es parejo entre secciones.
+- **TP1 Aprobados** / **TP1 Desaprobados**: cómo se relaciona el resultado del TP1 con el resultado previo en el TP0 (incluye a quienes no tienen TP0 registrado, por ejemplo por RPL).
+- **Intentos en TP1**: cuántos intentos de entrega hicieron los que aprobaron comparados con los que desaprobaron.
+- **Estado en TP1 Desaprobados**: entre los que desaprobaron, cuántos fallaron por un problema del pipeline de corrección automática (no compila, timeout) contra cuántos sí llegaron a corregirse pero no alcanzaron la nota mínima.
+
+Si la hoja de un TP no existe en la planilla de ese cuatrimestre (por ejemplo, un TP que se dejó de tomar), la notebook lo detecta sola y omite esas estadísticas puntuales, sin afectar al resto.
 
 ## Cómo está organizada la notebook
 
 Debajo del título hay una introducción general (qué hace, cómo correrla, cómo está organizada) y después 3 subtítulos principales:
 
-- **Planilla**: la URL de la planilla de Google Sheets a analizar. Es lo único que hace falta tocar para correr sobre otro cuatrimestre; el campo es un formulario de Colab (`#@param`), con el código oculto por defecto.
-- **Configuración**: todo el armado previo a calcular cualquier estadística — imports (**Dependencias**), nombres canónicos de columna/hoja (**Constantes**), el logger (**Logger**), y la conexión con Google Sheets más la normalización de los datos (**Preprocesamiento**: Autenticación, Normalización, Hojas, Columnas, Vista previa).
-- **Estadísticas**: el análisis en sí. **Utilidades** tiene los helpers compartidos por los gráficos (formateo de etiquetas, dibujo de barras, chequeo de qué hojas están disponibles, aviso de valores no reconocidos, numeración de figuras); cada TP (`TP0`, `TP1`, y los que se sumen después) agrupa sus propios módulos, y cada módulo tiene su **Implementación** (la función que arma el gráfico) y su **Resultado** (donde se corre esa función y se ve el gráfico o la tabla).
+- **Planilla**: la URL de la planilla de Google Sheets a analizar. Es lo único que hace falta tocar para correr sobre otro cuatrimestre.
+- **Configuración**: todo el armado previo — conexión con Google Sheets, descarga y normalización de los datos. En general no hace falta tocar nada acá.
+- **Estadísticas**: los gráficos y tablas descriptos arriba, agrupados por TP.
 
-Al abrir la notebook en Colab, la mayoría de las secciones arrancan colapsadas (`metadata.colab.collapsed_sections`) — quedan abiertas de entrada **Planilla** y, dentro de Estadísticas, toda la cadena hasta cada **Resultado** (`Estadísticas` → cada TP → cada módulo → `Resultado`), ya que en Colab colapsar una sección oculta todo lo que cuelga de ella. Lo que sigue colapsado es **Configuración** (y sus subsecciones) y cada **Implementación**.
+Al abrir la notebook en Colab, la mayoría de las secciones arrancan colapsadas — quedan abiertas de entrada **Planilla** y todos los gráficos/tablas de **Estadísticas**, para poder ver los resultados de una sin tener que ir abriendo secciones. El resto (Configuración, y el detalle de implementación de cada gráfico) se puede expandir con la flechita al lado de cada subtítulo si hace falta ver más detalle.
 
 ## Estructura del repositorio
 
@@ -39,21 +48,14 @@ La notebook está pensada para correr en Google Colab, leyendo directo la planil
    También podés ir a [colab.research.google.com](https://colab.research.google.com) → `Archivo > Abrir notebook > GitHub` y buscar `matias-ferrero/algo2-stats`.
 2. En **Planilla**, pegá la URL de la planilla a analizar (o dejá la que ya está, si es la correcta).
 3. `Entorno de ejecución > Ejecutar todas` (o corré celda por celda desde arriba hacia abajo).
-4. Al llegar a **Autenticación** van a aparecer dos pop-ups: uno para elegir la cuenta de Google, y otro para autorizar el acceso a Drive/Sheets. Esa cuenta necesita tener acceso de lectura a la planilla; si no, la notebook va a fallar más adelante, al bajar las hojas. Si el login se completa bien no vas a ver ningún mensaje en la consola (es silencioso a propósito); si algo falla, sí vas a ver un error explicando qué pasó.
-5. El resto de las celdas corren solas: descargan las hojas, las normalizan, y generan las estadísticas — los gráficos y tablas de cada módulo aparecen en su subsección **Resultado**.
+4. Al llegar a **Autenticación** van a aparecer dos pop-ups: uno para elegir la cuenta de Google, y otro para autorizar el acceso a Drive/Sheets. Esa cuenta necesita tener acceso de lectura a la planilla; si no, la notebook va a fallar más adelante, al bajar las hojas. Si el login se completa bien no vas a ver ningún mensaje en la consola; si algo falla, sí vas a ver un error explicando qué pasó.
+5. El resto de las celdas corren solas: descargan las hojas, las normalizan, y generan las estadísticas.
 
 > El link de arriba apunta siempre a la rama `main` de GitHub, así que solo vas a ver ahí los cambios que ya estén mergeados. Si querés probar una rama con un PR abierto, reemplazá `main` por el nombre de esa rama en la URL.
 
-## Convenciones para agregar secciones nuevas
+## Si algo falla
 
-Todo esto vive en la subsección **Utilidades**, dentro de Estadísticas:
-
-- **Hojas o columnas renombradas**: si la planilla real cambia un nombre de hoja o columna de un cuatrimestre a otro (ya pasó entre 2025 y 2026), hay que agregarlo a `SHEET_ALIASES`/`VALID_SHEETS` (Constantes) o a `COLUMN_ALIASES` (Normalización).
-- **Chequeo de hoja disponible**: cada sección de estadísticas depende de `hoja_disponible` (calculado a partir de `HOJAS_REQUERIDAS`) para saltearse sin error si su hoja no está en la planilla de ese cuatrimestre. Al implementar una sección nueva (`LISTA`, `TP2`, ...) hay que sumar su hoja a `HOJAS_REQUERIDAS` y guardar sus celdas con `if hoja_disponible[...]:`.
-- **Numeración de figuras**: cada sección mayor (TP0, TP1, ...) tiene un prefijo fijo en `SECTION_FIGURE_PREFIX`, y sus figuras se numeran consecutivamente dentro de ese prefijo (TP0 → `1.1`, `1.2`; TP1 → `2.1`...`2.7`). Al agregar una sección nueva hay que sumarle una entrada con el próximo número.
-- **Secciones abiertas/colapsadas por defecto**: ver "Cómo está organizada la notebook" más arriba. Al agregar un módulo nuevo, hay que sacar su encabezado y el de su TP de `collapsed_sections` (dejarlos abiertos) para que su Resultado también quede visible de una, sin necesidad de expandir nada a mano.
-
-## Notas
-
-- Las secciones **RESULTADOS TP0**, **Abandonos post TP0**, **Resultados del TP1**, **Notas del TP1**, **Notas por sección del TP1**, **TP1 Aprobados**, **TP1 Desaprobados**, **Intentos en TP1** y **Estado en TP1 Desaprobados** ya están todas implementadas.
-- Los logs del `logger` están en español. En una corrida sin problemas no debería imprimirse ningún log (los mensajes de camino feliz quedan en `debug`, no en `info`); solo se ven `warning`/`error`/`critical` ante datos o hojas inesperados (hoja faltante, valores de `Aprobado`/`Estado` que no matchean ninguna categoría conocida, etc.).
+- **No se puede abrir la planilla / error al autenticarse**: revisá que la URL en **Planilla** sea correcta y completa, y que la cuenta de Google con la que iniciaste sesión tenga acceso de lectura a esa planilla.
+- **Falta el gráfico de un TP entero**: si ese TP no existe en la planilla de este cuatrimestre, la notebook lo salta y avisa, sin romper el resto — no hace falta hacer nada.
+- **Aparece un mensaje de advertencia (amarillo)**: suele indicar un dato puntual inesperado en la planilla (una hoja vacía, un valor que no se pudo interpretar); la notebook sigue corriendo igual, pero puede valer la pena revisar ese dato en la planilla original.
+- **Aparece un mensaje de error (rojo)**: algo impidió seguir (por ejemplo, no se pudo leer ninguna hoja); el mensaje explica qué pasó.
