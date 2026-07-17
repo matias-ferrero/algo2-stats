@@ -12,19 +12,24 @@ A partir de la planilla de corrección (una planilla de Google Sheets con una ho
 - **RESULTADOS TP0**: qué proporción de estudiantes aprobó o desaprobó el TP0.
 - **Abandonos post TP0**: quiénes entregaron el TP0 pero nunca llegaron a entregar el TP1, separados según si habían aprobado o desaprobado el TP0.
 
-**TP1**
-- **Resultados del TP1**: qué proporción aprobó, desaprobó, o todavía no tiene nota cargada en el TP1.
+**TP1, LISTA, ABB, HASH y TP2**
+
+Estas cinco hojas siguen el mismo orden cronológico de la materia (TP0 → TP1 → LISTA → ABB → HASH → TP2) y comparten exactamente los mismos 7 módulos, uno por cada hoja (con `TP1` reemplazado por `LISTA`/`ABB`/`HASH`/`TP2` según corresponda):
+
+- **Resultados del TP1**: qué proporción aprobó, desaprobó, o todavía no tiene nota cargada (corrección abierta, o pendiente de una reentrega).
 - **Notas del TP1**: distribución de las notas numéricas entre quienes aprobaron.
-- **Notas por sección del TP1**: lo mismo, desglosado en Código, Pruebas e Informe, para ver si el rendimiento es parejo entre secciones.
-- **TP1 Aprobados** / **TP1 Desaprobados**: cómo se relaciona el resultado del TP1 con el resultado previo en el TP0 (incluye a quienes no tienen TP0 registrado, por ejemplo por RPL).
+- **Notas por sección del TP1**: lo mismo, desglosado en Código, Pruebas e Informe (más Interacción — la defensa oral — en el caso del TP2), para ver si el rendimiento es parejo entre secciones.
+- **TP1 Aprobados** / **TP1 Desaprobados**: cómo se relaciona el resultado de esa hoja con el resultado del TP inmediatamente anterior (incluye a quienes no tienen registro ahí, por ejemplo por RPL, o porque ese TP no se tomó ese cuatrimestre).
 - **Intentos en TP1**: cuántos intentos de entrega hicieron los que aprobaron comparados con los que desaprobaron.
 - **Estado en TP1 Desaprobados**: entre los que desaprobaron, cuántos fallaron por un problema del pipeline de corrección automática (no compila, timeout) contra cuántos sí llegaron a corregirse pero no alcanzaron la nota mínima.
+
+`ABB` es un caso particular: la cátedra dejó de tomarlo como trabajo práctico desde 2026, así que en planillas de ese año en adelante la notebook detecta que la hoja no existe y omite toda la sección con un único warning (ver más abajo). Por eso, a diferencia del resto, la sección **ABB** de la notebook arranca colapsada por default en vez de abierta.
 
 Si la hoja de un TP no existe en la planilla de ese cuatrimestre (por ejemplo, un TP que se dejó de tomar), la notebook lo detecta sola y omite esas estadísticas puntuales, sin afectar al resto.
 
 ### Cómo leer los gráficos
 
-Todos los gráficos que muestran aprobado/desaprobado/pendiente (RESULTADOS TP0, Abandonos post TP0, Resultados del TP1, TP1 Aprobados, TP1 Desaprobados, y Estado en TP1 Desaprobados) usan siempre los mismos tres colores, así que una vez que se aprende el código en un gráfico se puede leer cualquier otro sin releer la leyenda:
+Todos los gráficos que muestran aprobado/desaprobado/pendiente (RESULTADOS TP0, Abandonos post TP0, y los módulos Resultados / X Aprobados / X Desaprobados / Estado en X Desaprobados de TP1, LISTA, ABB, HASH y TP2) usan siempre los mismos tres colores, así que una vez que se aprende el código en un gráfico se puede leer cualquier otro sin releer la leyenda:
 
 - **Verde**: el caso positivo (aprobado, o corrección sin problemas).
 - **Rojo**: el caso negativo (desaprobado, o error de corrección).
@@ -40,7 +45,7 @@ Debajo del título hay una introducción general (qué hace, cómo correrla, có
 - **Configuración**: todo el armado previo — conexión con Google Sheets, descarga y normalización de los datos. En general no hace falta tocar nada acá.
 - **Estadísticas**: los gráficos y tablas descriptos arriba, agrupados por TP.
 
-Al abrir la notebook en Colab, la mayoría de las secciones arrancan colapsadas — quedan abiertas de entrada **Planilla** y todos los gráficos/tablas de **Estadísticas**, para poder ver los resultados de una sin tener que ir abriendo secciones. El resto (Configuración, y el detalle de implementación de cada gráfico) se puede expandir con la flechita al lado de cada subtítulo si hace falta ver más detalle.
+Al abrir la notebook en Colab, la mayoría de las secciones arrancan colapsadas — quedan abiertas de entrada **Planilla** y todos los gráficos/tablas de **Estadísticas**, para poder ver los resultados de una sin tener que ir abriendo secciones. La única excepción es **ABB**, que arranca colapsada como el resto de Configuración: esa hoja dejó de tomarse desde 2026, así que sus estadísticas quedan un clic más lejos. El resto (Configuración, ABB, y el detalle de implementación de cada gráfico) se puede expandir con la flechita al lado de cada subtítulo si hace falta ver más detalle.
 
 ## Estructura del repositorio
 
