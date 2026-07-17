@@ -36,7 +36,7 @@ Todos los gráficos que muestran aprobado/desaprobado/pendiente (RESULTADOS TP0,
 - **Verde**: el caso positivo (aprobado, o corrección sin problemas).
 - **Rojo**: el caso negativo (desaprobado, o error de corrección).
 - **Ámbar**: pendiente — la corrección de ese TP todavía no cerró (sin nota, o en reentrega), o entre los desaprobados de un pipeline, timeout.
-- **Naranja**: no disponible — no hay ningún registro de ese TP para este alumno (nunca lo entregó, o directamente esa hoja no existe en esta planilla). Solo aparece en los módulos "X Aprobados"/"X Desaprobados", que son los únicos que cruzan contra un TP anterior; el resto de los gráficos solo usa verde/rojo/ámbar.
+- **Gris**: no disponible (N/A) — no hay ningún registro de ese TP para este alumno (nunca lo entregó, o directamente esa hoja no existe en esta planilla). Solo aparece en los módulos "X Aprobados"/"X Desaprobados", que son los únicos que cruzan contra un TP anterior; el resto de los gráficos solo usa verde/rojo/ámbar.
 
 Cuando la proporción es entre dos categorías (por ejemplo, aprobado/desaprobado), se muestra como una **barra de ratio** — un segmento por categoría, con el porcentaje y la cantidad de alumnos adentro. Cuando son tres o más categorías genuinas (por ejemplo, aprobado/desaprobado/sin nota/N/A), se muestra como una **donut**, con el total de alumnos en el hueco central.
 
