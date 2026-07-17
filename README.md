@@ -14,14 +14,16 @@ A partir de la planilla de corrección (una planilla de Google Sheets con una ho
 
 **TP1, LISTA, ABB, HASH y TP2**
 
-Estas cinco hojas siguen el mismo orden cronológico de la materia (TP0 → TP1 → LISTA → ABB → HASH → TP2) y comparten exactamente los mismos 7 módulos, uno por cada hoja (con `TP1` reemplazado por `LISTA`/`ABB`/`HASH`/`TP2` según corresponda):
+Estas cinco hojas siguen el mismo orden cronológico de la materia (TP0 → TP1 → LISTA → ABB → HASH → TP2) y comparten los mismos módulos base, uno por cada hoja (con `TP1` reemplazado por `LISTA`/`ABB`/`HASH`/`TP2` según corresponda):
 
 - **Resultados del TP1**: qué proporción aprobó, desaprobó, o todavía no tiene nota cargada (corrección abierta, o pendiente de una reentrega).
 - **Notas del TP1**: distribución de las notas numéricas entre quienes aprobaron.
 - **Notas por sección del TP1**: lo mismo, desglosado en Código, Pruebas e Informe (más Interacción — la defensa oral — en el caso del TP2), para ver si el rendimiento es parejo entre secciones.
-- **TP1 Aprobados** / **TP1 Desaprobados**: cómo se relaciona el resultado de esa hoja con el resultado del TP inmediatamente anterior (incluye a quienes no tienen registro ahí, por ejemplo por RPL, o porque ese TP no se tomó ese cuatrimestre).
+- **TP1 Desaprobados**: cómo se relaciona el resultado de esa hoja con el resultado del TP inmediatamente anterior, entre quienes desaprobaron (incluye a quienes no tienen registro ahí, por ejemplo por RPL, o porque ese TP no se tomó ese cuatrimestre).
 - **Intentos en TP1**: cuántos intentos de entrega hicieron los que aprobaron comparados con los que desaprobaron.
 - **Estado en TP1 Desaprobados**: entre los que desaprobaron, cuántos fallaron por un problema del pipeline de corrección automática (no compila, timeout) contra cuántos sí llegaron a corregirse pero no alcanzaron la nota mínima.
+
+Solo **TP1** tiene además un módulo **TP1 Aprobados**, el complemento de TP1 Desaprobados: mira el resultado previo en el TP0 de quienes sí aprobaron el TP1. LISTA, ABB, HASH y TP2 no lo tienen.
 
 `ABB` es un caso particular: la cátedra dejó de tomarlo como trabajo práctico desde 2026, así que en planillas de ese año en adelante la notebook detecta que la hoja no existe y omite toda la sección con un único warning (ver más abajo). Por eso, a diferencia del resto, la sección **ABB** de la notebook arranca colapsada por default en vez de abierta.
 
@@ -29,7 +31,7 @@ Si la hoja de un TP no existe en la planilla de ese cuatrimestre (por ejemplo, u
 
 ### Cómo leer los gráficos
 
-Todos los gráficos que muestran aprobado/desaprobado/pendiente (RESULTADOS TP0, Abandonos post TP0, y los módulos Resultados / X Aprobados / X Desaprobados / Estado en X Desaprobados de TP1, LISTA, ABB, HASH y TP2) usan siempre los mismos tres colores, así que una vez que se aprende el código en un gráfico se puede leer cualquier otro sin releer la leyenda:
+Todos los gráficos que muestran aprobado/desaprobado/pendiente (RESULTADOS TP0, Abandonos post TP0, TP1 Aprobados, y los módulos Resultados / X Desaprobados / Estado en X Desaprobados de TP1, LISTA, ABB, HASH y TP2) usan siempre los mismos tres colores, así que una vez que se aprende el código en un gráfico se puede leer cualquier otro sin releer la leyenda:
 
 - **Verde**: el caso positivo (aprobado, o corrección sin problemas).
 - **Rojo**: el caso negativo (desaprobado, o error de corrección).
