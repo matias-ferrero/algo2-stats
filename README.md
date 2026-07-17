@@ -19,25 +19,26 @@ Estas cinco hojas siguen el mismo orden cronológico de la materia (TP0 → TP1 
 - **Resultados del TP1**: qué proporción aprobó, desaprobó, o todavía no tiene nota cargada (corrección abierta, o pendiente de una reentrega).
 - **Notas del TP1**: distribución de las notas numéricas entre quienes aprobaron.
 - **Notas por sección del TP1**: lo mismo, desglosado en Código, Pruebas e Informe (más Interacción — la defensa oral — en el caso del TP2), para ver si el rendimiento es parejo entre secciones.
-- **TP1 Desaprobados**: cómo se relaciona el resultado de esa hoja con el resultado del TP inmediatamente anterior, entre quienes desaprobaron (incluye a quienes no tienen registro ahí, por ejemplo por RPL, o porque ese TP no se tomó ese cuatrimestre).
+- **TP1 Desaprobados**: cómo se relaciona el resultado de esa hoja con el resultado del TP inmediatamente anterior, entre quienes desaprobaron. Distingue cuatro casos: aprobó ese TP anterior, lo desaprobó, todavía no tiene nota ahí (**Sin Nota**, corrección pendiente o en reentrega), o no tiene ningún registro (**N/A**, por ejemplo por RPL, o porque ese TP no se tomó ese cuatrimestre).
 - **Intentos en TP1**: cuántos intentos de entrega hicieron los que aprobaron comparados con los que desaprobaron.
 - **Estado en TP1 Desaprobados**: entre los que desaprobaron, cuántos fallaron por un problema del pipeline de corrección automática (no compila, timeout) contra cuántos sí llegaron a corregirse pero no alcanzaron la nota mínima.
 
-Solo **TP1** tiene además un módulo **TP1 Aprobados**, el complemento de TP1 Desaprobados: mira el resultado previo en el TP0 de quienes sí aprobaron el TP1. LISTA, ABB, HASH y TP2 no lo tienen.
+Solo **TP1** tiene además un módulo **TP1 Aprobados**, el complemento de TP1 Desaprobados: mira el resultado previo en el TP0 de quienes sí aprobaron el TP1, con la misma distinción Sin Nota/N/A. LISTA, ABB, HASH y TP2 no lo tienen.
 
-`ABB` es un caso particular: la cátedra dejó de tomarlo como trabajo práctico desde 2026, así que en planillas de ese año en adelante la notebook detecta que la hoja no existe y omite toda la sección con un único warning (ver más abajo). Por eso, a diferencia del resto, la sección **ABB** de la notebook arranca colapsada por default en vez de abierta.
+`ABB` es un caso particular: la cátedra dejó de tomarlo como trabajo práctico desde 2026, así que en planillas de ese año en adelante la notebook detecta que la hoja no existe y omite toda la sección con un único warning (ver más abajo). Por eso, a diferencia del resto, la sección **ABB** de la notebook arranca colapsada por default en vez de abierta. Por la misma razón, **HASH Desaprobados** compara contra `ABB` cuando esa hoja existe, y cae automáticamente a `LISTA` cuando no — sin eso, en planillas 2026+ el gráfico no tendría contra qué comparar.
 
 Si la hoja de un TP no existe en la planilla de ese cuatrimestre (por ejemplo, un TP que se dejó de tomar), la notebook lo detecta sola y omite esas estadísticas puntuales, sin afectar al resto.
 
 ### Cómo leer los gráficos
 
-Todos los gráficos que muestran aprobado/desaprobado/pendiente (RESULTADOS TP0, Abandonos post TP0, TP1 Aprobados, y los módulos Resultados / X Desaprobados / Estado en X Desaprobados de TP1, LISTA, ABB, HASH y TP2) usan siempre los mismos tres colores, así que una vez que se aprende el código en un gráfico se puede leer cualquier otro sin releer la leyenda:
+Todos los gráficos que muestran aprobado/desaprobado/pendiente (RESULTADOS TP0, Abandonos post TP0, Estado en X Desaprobados, y los módulos Resultados / TP1 Aprobados / X Desaprobados de TP1, LISTA, ABB, HASH y TP2) usan siempre la misma paleta, así que una vez que se aprende el código en un gráfico se puede leer cualquier otro sin releer la leyenda:
 
 - **Verde**: el caso positivo (aprobado, o corrección sin problemas).
 - **Rojo**: el caso negativo (desaprobado, o error de corrección).
-- **Ámbar**: lo pendiente o no disponible (sin nota todavía, sin registro previo, timeout).
+- **Ámbar**: pendiente — la corrección de ese TP todavía no cerró (sin nota, o en reentrega), o entre los desaprobados de un pipeline, timeout.
+- **Naranja**: no disponible — no hay ningún registro de ese TP para este alumno (nunca lo entregó, o directamente esa hoja no existe en esta planilla). Solo aparece en los módulos "X Aprobados"/"X Desaprobados", que son los únicos que cruzan contra un TP anterior; el resto de los gráficos solo usa verde/rojo/ámbar.
 
-Cuando la proporción es entre dos categorías (por ejemplo, aprobado/desaprobado), se muestra como una **barra de ratio** — un segmento por categoría, con el porcentaje y la cantidad de alumnos adentro. Cuando son tres categorías genuinas (por ejemplo, aprobado/desaprobado/sin nota), se muestra como una **donut**, con el total de alumnos en el hueco central.
+Cuando la proporción es entre dos categorías (por ejemplo, aprobado/desaprobado), se muestra como una **barra de ratio** — un segmento por categoría, con el porcentaje y la cantidad de alumnos adentro. Cuando son tres o más categorías genuinas (por ejemplo, aprobado/desaprobado/sin nota/N/A), se muestra como una **donut**, con el total de alumnos en el hueco central.
 
 ## Cómo está organizada la notebook
 
