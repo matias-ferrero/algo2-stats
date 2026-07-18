@@ -8,6 +8,15 @@ Notebook para generar estadísticas sobre las entregas de los alumnos de la cát
 
 A partir de la planilla de corrección (una planilla de Google Sheets con una hoja por TP), la notebook se autentica contra Google Sheets, descarga y normaliza cada hoja, y genera un gráfico (de barras, de donut, o una barra de ratio, según corresponda) y, cuando aplica, una tabla con el detalle de los estudiantes, para cada una de estas preguntas:
 
+**General**
+
+Estas cuatro estadísticas, a diferencia de todas las demás, no miran una hoja por vez sino todos los TPs en conjunto:
+
+- **Tasa de aprobación y desaprobación por TP**: compara la proporción de aprobados, desaprobados y sin nota de cada TP disponible, en un único gráfico (una fila por TP).
+- **Análisis de notas**: distribución de notas numéricas juntando los aprobados de TP1, LISTA, ABB, HASH y TP2 (TP0 no tiene nota numérica, no participa).
+- **Análisis por sección**: lo mismo desglosado en Código, Pruebas e Informe, pooleando esas mismas cinco hojas.
+- **Abandonos entre TPs**: para cada transición entre TPs consecutivos (TP0→TP1, TP1→LISTA, ..., HASH→TP2), cuántos estudiantes aprobaron el anterior pero nunca entregaron el siguiente. Si una hoja intermedia no existe en la planilla (por ejemplo `ABB` desde 2026), esa transición salta el hueco automáticamente (queda `LISTA→HASH` en vez de romperse).
+
 **TP0**
 - **RESULTADOS TP0**: qué proporción de estudiantes aprobó o desaprobó el TP0.
 - **Abandonos post TP0**: quiénes entregaron el TP0 pero nunca llegaron a entregar el TP1, separados según si habían aprobado o desaprobado el TP0.
@@ -33,14 +42,14 @@ Si la hoja de un TP no existe en la planilla de ese cuatrimestre (por ejemplo, u
 
 ### Cómo leer los gráficos
 
-Todos los gráficos que muestran aprobado/desaprobado/pendiente (RESULTADOS TP0, Abandonos post TP0, Estado en X Desaprobados, y los módulos Resultados / TP1 Aprobados / X Desaprobados de TP1, LISTA, ABB, HASH y TP2) usan siempre la misma paleta, así que una vez que se aprende el código en un gráfico se puede leer cualquier otro sin releer la leyenda:
+Todos los gráficos que muestran aprobado/desaprobado/pendiente (Tasa de aprobación y desaprobación por TP, RESULTADOS TP0, Abandonos post TP0, Estado en X Desaprobados, y los módulos Resultados / TP1 Aprobados / X Desaprobados de TP1, LISTA, ABB, HASH y TP2) usan siempre la misma paleta, así que una vez que se aprende el código en un gráfico se puede leer cualquier otro sin releer la leyenda:
 
 - **Verde**: el caso positivo (aprobado, o corrección sin problemas).
 - **Rojo**: el caso negativo (desaprobado, o error de corrección).
 - **Ámbar**: pendiente — la corrección de ese TP todavía no cerró (sin nota, o en reentrega), o entre los desaprobados de un pipeline, timeout.
 - **Gris**: no disponible (N/A) — no hay ningún registro de ese TP para este alumno (nunca lo entregó, o directamente esa hoja no existe en esta planilla). Solo aparece en los módulos "X Aprobados"/"X Desaprobados", que son los únicos que cruzan contra un TP anterior; el resto de los gráficos solo usa verde/rojo/ámbar.
 
-Cuando la proporción es entre dos categorías (por ejemplo, aprobado/desaprobado), se muestra como una **barra de ratio** — un segmento por categoría, con el porcentaje y la cantidad de alumnos adentro. Cuando son tres o más categorías genuinas (por ejemplo, aprobado/desaprobado/sin nota/N/A), se muestra como una **donut**, con el total de alumnos en el hueco central.
+Cuando la proporción es entre dos categorías (por ejemplo, aprobado/desaprobado), se muestra como una **barra de ratio** — un segmento por categoría, con el porcentaje y la cantidad de alumnos adentro. Cuando son tres o más categorías genuinas (por ejemplo, aprobado/desaprobado/sin nota/N/A), se muestra como una **donut**, con el total de alumnos en el hueco central. Tasa de aprobación y desaprobación por TP es la única excepción: como compara la misma proporción entre varios TPs a la vez, usa varias barras de ratio apiladas una debajo de la otra (una fila por TP) en vez de un donut por TP, para que las proporciones se puedan comparar de un vistazo entre filas.
 
 En los donuts, si una porción es muy chica su etiqueta (`%` + cantidad) sale del gráfico con una línea fina que la conecta a su porción, en vez de quedar apretada adentro — así nunca se superpone con la etiqueta de la porción de al lado, sin importar cuántas porciones chicas haya juntas.
 
