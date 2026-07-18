@@ -12,7 +12,7 @@ A partir de la planilla de corrección (una planilla de Google Sheets con una ho
 
 Estas cuatro estadísticas, a diferencia de todas las demás, no miran una hoja por vez sino todos los TPs en conjunto:
 
-- **Tasa de aprobación y desaprobación por TP**: compara la proporción de aprobados, desaprobados y sin nota de cada TP disponible, en un único gráfico (una fila por TP).
+- **Tasa de aprobación y desaprobación por TP**: compara la proporción de aprobados, desaprobados y sin nota de TP1, LISTA, ABB, HASH y TP2 (TP0 no participa: no tiene `Nota final`), en un único gráfico de columnas (una por TP).
 - **Análisis de notas**: distribución de notas numéricas juntando los aprobados de TP1, LISTA, ABB, HASH y TP2 (TP0 no tiene nota numérica, no participa).
 - **Análisis por sección**: lo mismo desglosado en Código, Pruebas e Informe, pooleando esas mismas cinco hojas.
 - **Abandonos entre TPs**: para cada transición entre TPs consecutivos (TP0→TP1, TP1→LISTA, ..., HASH→TP2), cuántos estudiantes aprobaron el anterior pero nunca entregaron el siguiente. Si una hoja intermedia no existe en la planilla (por ejemplo `ABB` desde 2026), esa transición salta el hueco automáticamente (queda `LISTA→HASH` en vez de romperse).
@@ -49,7 +49,7 @@ Todos los gráficos que muestran aprobado/desaprobado/pendiente (Tasa de aprobac
 - **Ámbar**: pendiente — la corrección de ese TP todavía no cerró (sin nota, o en reentrega), o entre los desaprobados de un pipeline, timeout.
 - **Gris**: no disponible (N/A) — no hay ningún registro de ese TP para este alumno (nunca lo entregó, o directamente esa hoja no existe en esta planilla). Solo aparece en los módulos "X Aprobados"/"X Desaprobados", que son los únicos que cruzan contra un TP anterior; el resto de los gráficos solo usa verde/rojo/ámbar.
 
-Cuando la proporción es entre dos categorías (por ejemplo, aprobado/desaprobado), se muestra como una **barra de ratio** — un segmento por categoría, con el porcentaje y la cantidad de alumnos adentro. Cuando son tres o más categorías genuinas (por ejemplo, aprobado/desaprobado/sin nota/N/A), se muestra como una **donut**, con el total de alumnos en el hueco central. Tasa de aprobación y desaprobación por TP es la única excepción: como compara la misma proporción entre varios TPs a la vez, usa varias barras de ratio apiladas una debajo de la otra (una fila por TP) en vez de un donut por TP, para que las proporciones se puedan comparar de un vistazo entre filas.
+Cuando la proporción es entre dos categorías (por ejemplo, aprobado/desaprobado), se muestra como una **barra de ratio** — un segmento por categoría, con el porcentaje y la cantidad de alumnos adentro. Cuando son tres o más categorías genuinas (por ejemplo, aprobado/desaprobado/sin nota/N/A), se muestra como una **donut**, con el total de alumnos en el hueco central. Tasa de aprobación y desaprobación por TP es la única excepción: como compara la misma proporción entre varios TPs a la vez, usa varias columnas 100%-apiladas una al lado de la otra (una por TP, con eje X y eje Y) en vez de un donut por TP, para que las proporciones se puedan comparar de un vistazo entre columnas.
 
 En los donuts, si una porción es muy chica su etiqueta (`%` + cantidad) sale del gráfico con una línea fina que la conecta a su porción, en vez de quedar apretada adentro — así nunca se superpone con la etiqueta de la porción de al lado, sin importar cuántas porciones chicas haya juntas.
 
