@@ -19,13 +19,15 @@ Estas cinco hojas siguen el mismo orden cronológico de la materia (TP0 → TP1 
 - **Resultados del TP1**: qué proporción aprobó, desaprobó, o todavía no tiene nota cargada (corrección abierta, o pendiente de una reentrega).
 - **Notas del TP1**: distribución de las notas numéricas entre quienes aprobaron.
 - **Notas por sección del TP1**: lo mismo, desglosado en Código, Pruebas e Informe (más Interacción — la defensa oral — en el caso del TP2), para ver si el rendimiento es parejo entre secciones.
-- **TP1 Desaprobados**: cómo se relaciona el resultado de esa hoja con el resultado del TP inmediatamente anterior, entre quienes desaprobaron. Distingue cuatro casos: aprobó ese TP anterior, lo desaprobó, todavía no tiene nota ahí (**Sin Nota**, corrección pendiente o en reentrega), o no tiene ningún registro (**N/A**, por ejemplo por RPL, o porque ese TP no se tomó ese cuatrimestre).
+- **TP1 Desaprobados** (en la notebook: *"Resultado en TP0 de los desaprobados de TP1"*): cómo se relaciona el resultado de esa hoja con el resultado del TP inmediatamente anterior, entre quienes desaprobaron. Distingue cuatro casos: aprobó ese TP anterior, lo desaprobó, todavía no tiene nota ahí (**Sin Nota**, corrección pendiente o en reentrega), o no tiene ningún registro (**N/A**, por ejemplo por RPL, o porque ese TP no se tomó ese cuatrimestre).
 - **Intentos en TP1**: cuántos intentos de entrega hicieron los que aprobaron comparados con los que desaprobaron.
 - **Estado en TP1 Desaprobados**: entre los que desaprobaron, cuántos fallaron por un problema del pipeline de corrección automática (no compila, timeout) contra cuántos sí llegaron a corregirse pero no alcanzaron la nota mínima.
 
-Solo **TP1** tiene además un módulo **TP1 Aprobados**, el complemento de TP1 Desaprobados: mira el resultado previo en el TP0 de quienes sí aprobaron el TP1, con la misma distinción Sin Nota/N/A. LISTA, ABB, HASH y TP2 no lo tienen.
+(Los nombres en negrita de arriba son el nombre corto de cada módulo, el que se usa para referirse a ellos en esta guía y en la notebook misma; el título real que ves en la notebook — tanto en el encabezado de la sección como en el gráfico — suele ser más largo y descriptivo, como en el ejemplo de TP1 Desaprobados.)
 
-`ABB` es un caso particular: la cátedra dejó de tomarlo como trabajo práctico desde 2026, así que en planillas de ese año en adelante la notebook detecta que la hoja no existe y omite toda la sección con un único warning (ver más abajo). Por eso, a diferencia del resto, la sección **ABB** de la notebook arranca colapsada por default en vez de abierta. Por la misma razón, **HASH Desaprobados** compara contra `ABB` cuando esa hoja existe, y cae automáticamente a `LISTA` cuando no — sin eso, en planillas 2026+ el gráfico no tendría contra qué comparar.
+Solo **TP1** tiene además un módulo **TP1 Aprobados** (*"Resultado en TP0 de los aprobados de TP1"*), el complemento de TP1 Desaprobados: mira el resultado previo en el TP0 de quienes sí aprobaron el TP1, con la misma distinción Sin Nota/N/A. LISTA, ABB, HASH y TP2 no lo tienen — se sacó de esas cuatro secciones a propósito, para no duplicar el mismo análisis siete veces cuando alcanza con verlo una vez en TP1.
+
+`ABB` es un caso particular: la cátedra dejó de tomarlo como trabajo práctico desde 2026, así que en planillas de ese año en adelante la notebook detecta que la hoja no existe y omite toda la sección con un único warning (ver más abajo). Por eso, a diferencia del resto, la sección **ABB** de la notebook arranca colapsada por default en vez de abierta. Por la misma razón, **HASH Desaprobados** compara contra `ABB` cuando esa hoja existe, y cae automáticamente a `LISTA` cuando no — sin eso, en planillas 2026+ el gráfico no tendría contra qué comparar. Como la comparación depende de la planilla, el encabezado de esa sección queda genérico ("...en el TP anterior..."), pero el título del gráfico sí nombra la hoja real que usó esa corrida.
 
 Si la hoja de un TP no existe en la planilla de ese cuatrimestre (por ejemplo, un TP que se dejó de tomar), la notebook lo detecta sola y omite esas estadísticas puntuales, sin afectar al resto.
 
@@ -39,6 +41,8 @@ Todos los gráficos que muestran aprobado/desaprobado/pendiente (RESULTADOS TP0,
 - **Gris**: no disponible (N/A) — no hay ningún registro de ese TP para este alumno (nunca lo entregó, o directamente esa hoja no existe en esta planilla). Solo aparece en los módulos "X Aprobados"/"X Desaprobados", que son los únicos que cruzan contra un TP anterior; el resto de los gráficos solo usa verde/rojo/ámbar.
 
 Cuando la proporción es entre dos categorías (por ejemplo, aprobado/desaprobado), se muestra como una **barra de ratio** — un segmento por categoría, con el porcentaje y la cantidad de alumnos adentro. Cuando son tres o más categorías genuinas (por ejemplo, aprobado/desaprobado/sin nota/N/A), se muestra como una **donut**, con el total de alumnos en el hueco central.
+
+En los donuts, si una porción es muy chica su etiqueta (`%` + cantidad) sale del gráfico con una línea fina que la conecta a su porción, en vez de quedar apretada adentro — así nunca se superpone con la etiqueta de la porción de al lado, sin importar cuántas porciones chicas haya juntas.
 
 ## Cómo está organizada la notebook
 
