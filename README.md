@@ -10,12 +10,11 @@ A partir de la planilla de corrección (una planilla de Google Sheets con una ho
 
 **General**
 
-Estas cuatro estadísticas, a diferencia de todas las demás, no miran una hoja por vez sino todos los TPs en conjunto:
+Estas tres estadísticas, a diferencia de todas las demás, no miran una hoja por vez sino todos los TPs en conjunto:
 
 - **Tasa de aprobación y desaprobación por TP**: compara la proporción de aprobados, desaprobados y sin nota de TP1, LISTA, ABB, HASH y TP2 (TP0 no participa: no tiene `Nota final`), en un único gráfico de columnas (una por TP).
 - **Análisis de notas**: distribución de notas numéricas juntando los aprobados de TP1, LISTA, ABB, HASH y TP2 (TP0 no tiene nota numérica, no participa).
 - **Análisis por sección**: lo mismo desglosado en Código, Pruebas e Informe, pooleando esas mismas cinco hojas.
-- **Abandonos entre TPs**: para cada transición entre TPs consecutivos (TP0→TP1, TP1→LISTA, ..., HASH→TP2), cuántos estudiantes aprobaron el anterior pero nunca entregaron el siguiente. Si una hoja intermedia no existe en la planilla (por ejemplo `ABB` desde 2026), esa transición salta el hueco automáticamente (queda `LISTA→HASH` en vez de romperse).
 
 **TP0**
 - **RESULTADOS TP0**: qué proporción de estudiantes aprobó o desaprobó el TP0.
